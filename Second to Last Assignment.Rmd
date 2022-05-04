@@ -29,17 +29,23 @@ ggplot(data = df_transunion_issues, mapping = aes(x = n, y = reorder(issue, n)))
   geom_col() +
   theme_bw() +
   xlab("Issue Count") + ylab("Issue") 
-  
 
 
 ```
 
-## Including Plots
 
-You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
-plot(pressure)
+
+summary_names %>% 
+  count(issue)
+
+
+```
+
+```{r}
+complaints %>% 
+  count(company)
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
