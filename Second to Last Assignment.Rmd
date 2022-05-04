@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+complaints <- readRDS("complaints.rds")
 ```
 
 ## R Markdown
@@ -19,6 +20,18 @@ When you click the **Knit** button a document will be generated that includes bo
 library(tidyverse)
 summary_names <- complaints %>%
   filter(`company` == 'TRANSUNION INTERMEDIATE HOLDINGS, INC.')
+
+df_transunion_issues <- summary_names %>% 
+  count(issue) %>% 
+  filter(n>100)
+
+ggplot(data = df_transunion_issues, mapping = aes(x = n, y = reorder(issue, n))) +
+  geom_col() +
+  theme_bw() +
+  xlab("Issue Count") + ylab("Issue") 
+  
+
+
 ```
 
 ## Including Plots
