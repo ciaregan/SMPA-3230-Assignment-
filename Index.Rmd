@@ -75,3 +75,12 @@ ggplot(data = df_product, mapping = aes(x = n, y = reorder(product, n))) +
   ggtitle("Most Common Debt Complaints")
 ```
 
+ABOUT
+
+This dataframe includes complaitns filed against a host of large companies on March 1, 2020. Complaints were filed across all 50 states, and they are organized into product, sub-product and their result is detailed by issue. 
+
+In this manipulation, I first organized the data by grouping a dataframe to include just the companies and the issues filed against them. I collected them in decreasing order by issue, so I could see the companies with the greatest number of issues filed. I then chose to hone in on Transunion, which had the second most issues. I did so because I figured many of my classmates would choose the first in this list. I then produced a bar graph that indiciates what the top issues with Transunion were.
+
+In another manipulation, I sorted the data to produce a table that includes the most common products against companies, which turned out to be debt collection. Using this table, I produced a bar graph again, this time chronicling the most popular products of that debt collection.
+
+Overall, this data, like any dataframe, is dependent upon the effectiveness of its collection. There are empty boxes in the original file, likely due to human error. In order to see any patterns or trends with the issues and companies outlined here, it would be interesting to view data collected, say, a year later, on March 1, 2021.
