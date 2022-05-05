@@ -21,6 +21,8 @@ library(tidyverse)
 
 summary_names <- complaints %>% 
   count(company, issue)
+complaints %>% 
+  count(company, sort = TRUE)
 ```
 
 Column {data-width=350}
@@ -29,13 +31,7 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-complaints %>% 
-  count(company, sort = TRUE) 
-```
-
-### Chart C
-
-```{r}
+ 
 df_transunion_issues <- summary_names %>% 
   filter(company == "TRANSUNION INTERMEDIATE HOLDINGS, INC.")
 
@@ -50,16 +46,18 @@ ggplot(data = df_transunion_issues, mapping = aes(x = n, y = reorder(issue, n)))
   ggtitle("Common Transunion Complaints")
 ```
 
+### Chart C
 
 ```{r}
 summary_product <- complaints %>% 
   count(company, product)
-```
 
-
-```{r}
 complaints %>% 
   count(product, sort = TRUE) 
+```
+
+### Chart D
+
 ```
 
 ```{r}
