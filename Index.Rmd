@@ -75,7 +75,7 @@ ggplot(data = df_product, mapping = aes(x = n, y = reorder(product, n))) +
   ggtitle("Most Common Debt Complaints")
 ```
 
-ABOUT
+A### BOUT
 
 This dataframe includes complaitns filed against a host of large companies on March 1, 2020. Complaints were filed across all 50 states, and they are organized into product, sub-product and their result is detailed by issue. 
 
