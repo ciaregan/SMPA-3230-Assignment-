@@ -18,8 +18,29 @@ When you click the **Knit** button a document will be generated that includes bo
 
 ```{r cars}
 library(tidyverse)
-summary_names <- complaints %>%
-  filter(`company` == 'TRANSUNION INTERMEDIATE HOLDINGS, INC.')
+
+summary_names <- complaints %>% 
+  count(company, issue)
+```
+
+
+```{r cars}
+complaints %>% 
+  count(company, sort = TRUE) 
+```
+
+
+```{r cars}
+
+
+```
+
+
+```{r cars}
+
+
+df_transunion_issues <- summary_names %>% 
+  filter(company == "TRANSUNION INTERMEDIATE HOLDINGS, INC.")
 
 df_transunion_issues <- summary_names %>% 
   count(issue) %>% 
@@ -28,7 +49,8 @@ df_transunion_issues <- summary_names %>%
 ggplot(data = df_transunion_issues, mapping = aes(x = n, y = reorder(issue, n))) +
   geom_col() +
   theme_bw() +
-  xlab("Issue Count") + ylab("Issue") 
+  xlab("Issue Count") + ylab("Issue") +
+  ggtitle("Common Transunion Complaints")
 
 
 ```
@@ -36,16 +58,19 @@ ggplot(data = df_transunion_issues, mapping = aes(x = n, y = reorder(issue, n)))
 
 
 ```{r pressure, echo=FALSE}
+df_experian_issues <- summary_names %>% 
+  count(issue) 
+```
 
-summary_names %>% 
-  count(issue)
+
+```{r pressure, echo=FALSE}
+
 
 
 ```
 
 ```{r}
-complaints %>% 
-  count(company)
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
