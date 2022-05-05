@@ -8,6 +8,7 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+complaints <- readRDS("complaints.rds")
 ```
 
 Column {data-width=650}
@@ -16,7 +17,10 @@ Column {data-width=650}
 ### Chart A
 
 ```{r}
+library(tidyverse)
 
+summary_names <- complaints %>% 
+  count(company, issue)
 ```
 
 Column {data-width=350}
@@ -25,12 +29,51 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
-
+complaints %>% 
+  count(company, sort = TRUE) 
 ```
 
 ### Chart C
 
 ```{r}
+df_transunion_issues <- summary_names %>% 
+  filter(company == "TRANSUNION INTERMEDIATE HOLDINGS, INC.")
 
+df_transunion_issues <- summary_names %>% 
+  count(issue) %>% 
+  filter(n>100)
+
+ggplot(data = df_transunion_issues, mapping = aes(x = n, y = reorder(issue, n))) +
+  geom_col() +
+  theme_bw() +
+  xlab("Issue Count") + ylab("Issue") +
+  ggtitle("Common Transunion Complaints")
+```
+
+
+```{r}
+summary_product <- complaints %>% 
+  count(company, product)
+```
+
+
+```{r}
+complaints %>% 
+  count(product, sort = TRUE) 
+```
+
+```{r}
+df_product <- summary_product %>% 
+  filter(product == "Debt collection")
+
+df_product <- summary_product %>% 
+  count(product) %>% 
+  filter(n>100)
+
+ggplot(data = df_product, mapping = aes(x = n, y = reorder(product, n))) +
+  geom_col() + scale_color_manual(values=c("red", "pink", "orange" , "yellow" , "purple" , "blue" , "green" , "violetred4" , "yellowgreen")) +
+  theme_bw() +
+  xlab("Product Count") + ylab("Product") +
+  ggtitle("Most Common Debt Complaints")
 ```
 
