@@ -8,6 +8,8 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+install.packages("kableExtra")
+install.packages("data.table")
 complaints <- readRDS("complaints.rds")
 ```
 
@@ -18,17 +20,33 @@ Column {data-width=650}
 
 ```{r}
 library(tidyverse)
+library(data.table)
 
 summary_names <- complaints %>% 
   count(company, issue)
 complaints %>% 
   count(company, sort = TRUE)
-```
 
+```
 Column {data-width=350}
 -----------------------------------------------------------------------
 
 ### Chart B
+
+```{r}
+#options(tibble.width = Inf)
+#summary_names
+library(knitr)
+
+t = (summary_names) %>% 
+  count(issue)
+
+kable(t, caption = "Common Issues") 
+
+
+```
+
+### Chart C
 
 ```{r}
  
@@ -54,9 +72,20 @@ summary_product <- complaints %>%
 
 complaints %>% 
   count(product, sort = TRUE) 
+
 ```
 
-### Chart D
+### Chart E
+
+```{r}
+w = (summary_product) %>% 
+  count(product)
+
+kable(w, caption = "Common Products") 
+```
+
+
+### Chart F
 
 ```
 
@@ -68,14 +97,18 @@ df_product <- summary_product %>%
   count(product) %>% 
   filter(n>100)
 
-ggplot(data = df_product, mapping = aes(x = n, y = reorder(product, n))) +
+ggplot(data = summary_product, mapping = aes(x = n, y = reorder(product, n))) +
   geom_col() + scale_color_manual(values=c("red", "pink", "orange" , "yellow" , "purple" , "blue" , "green" , "violetred4" , "yellowgreen")) +
   theme_bw() +
   xlab("Product Count") + ylab("Product") +
   ggtitle("Most Common Debt Complaints")
+
+
+```
+  
 ```
 
-A### BOUT
+### ABOUT
 
 This dataframe includes complaitns filed against a host of large companies on March 1, 2020. Complaints were filed across all 50 states, and they are organized into product, sub-product and their result is detailed by issue. 
 
