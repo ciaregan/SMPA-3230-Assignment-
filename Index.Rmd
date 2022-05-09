@@ -7,6 +7,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
+install.packages("flexdashboard", repos = "https://github.com/ciaregan/SMPA-3230-Assignment-.git")
 library(flexdashboard)
 install.packages("kableExtra")
 install.packages("data.table")
